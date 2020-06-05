@@ -1,58 +1,63 @@
 package com.addressbook;
-
 import java.util.Scanner;
-
 class Person
 {
-	private String firstName;
-	private String lastName;
-	int Id;
-	int phoneNumber;
+	String firstName;
+	String lastName;
+	int id;
+	long phoneNumber;
 	Address completeAddress;
 	Scanner takeInput = new Scanner(System.in);
-	public Person()
+	public Person(int id, String firstName, String lastName, long phoneNumber, String completeAddress )
 	{
-		this.setFirstName();
-		this.setLastName();
-		this.setId();
-		this.setPhoneNumber();
-		this.setCompleteAddress();
-		
+		this.id=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.phoneNumber=phoneNumber;
+		String[] token = completeAddress.split(":");
+		this.completeAddress=new Address(token[0], token[1],token[2],Integer.parseInt(token[3]));
 	}
-	
-	public void setFirstName()
+	public Person()
+	{	
+		System.out.print("\n\t\t    Enter First Name :");
+		this.setFirstName(takeInput.nextLine());
+		System.out.print("\n\t\t    Enter Last Name :");
+		this.setLastName(takeInput.nextLine());
+		System.out.print("\n\t\t    Enter ID Number :");
+		this.setId(Integer.parseInt(takeInput.nextLine()));
+		System.out.print("\n\t\t    Enter Phone Number :");
+		this.setPhoneNumber(Long.parseLong(takeInput.nextLine()));
+		this.setCompleteAddress();	
+	}	
+	public void setFirstName(String firstName)
 	{
-		System.out.println("Enter First Name :");
-		firstName=takeInput.next();
+		this.firstName=firstName;
 	}
 	public String getFirstName()
 	{
 		return firstName;
 	}
-	public void setLastName()
+	public void setLastName(String lastName)
 	{
-		System.out.println("Enter Last Name :");
-		lastName=takeInput.next();
+		this.lastName=lastName;
 	}
 	public String getLastName()
 	{
 		return lastName;
 	}
-	public void setId()
+	public void setId(int id)
 	{
-		System.out.println("Enter Id :");
-		Id=takeInput.nextInt();
+		this.id=id;
 	}
 	public int getId()
 	{
-		return Id;
+		return id;
 	}
-	public void setPhoneNumber()
+	public void setPhoneNumber(long phoneNumber)
 	{
-		System.out.println("Enter Phone Number :");
-		phoneNumber=takeInput.nextInt();
+		this.phoneNumber=phoneNumber;
 	}
-	public int getPhoneNumber()
+	public long getPhoneNumber()
 	{
 		return phoneNumber;
 	}
@@ -64,4 +69,9 @@ class Person
 	{
 		return completeAddress;
 	}
+	public String toString() 
+	{
+		return "\"First Name: " + firstName + "\"\t\"Last Name: " + lastName + "\"\t\"ID: " + id + "\"\t\"PhoneNumber: "
+				+ phoneNumber +"\"\t"+ completeAddress ;
+	}	
 }
